@@ -11,9 +11,26 @@ Route::get('/', [KatalogController::class, 'index'])->name('home');
 Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog.index');
 
 // Authenticated Routes
+// --- PERUBAHAN DI SINI ---
+// Rute ini sekarang bertindak sebagai router pasca-login berdasarkan peran
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+
+    // Asumsi Anda memiliki kolom 'role' di tabel users
+    if ($user->role == 'superadmin') {
+        return redirect()->route('superadmin.dashboard');
+    }
+    
+    // Jika rolenya 'pegawai' atau peran lain selain superadmin
+    if ($user->role == 'pegawai') {
+        return redirect()->route('katalog.index');
+    }
+
+    // Fallback default jika peran tidak terdefinisi
+    return redirect()->route('katalog.index');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+// --- AKHIR PERUBAHAN ---
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
