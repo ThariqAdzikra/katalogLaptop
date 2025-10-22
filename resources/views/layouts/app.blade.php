@@ -41,7 +41,7 @@
                         <a class="nav-link" href="#">Kasir</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pembelian</a>
+                        <a class="nav-link" href="{{ route('pembelian.index') }}">Pembelian</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Penjualan</a>
