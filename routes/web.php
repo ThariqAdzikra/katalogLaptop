@@ -6,6 +6,7 @@ use App\Http\Controllers\StokController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\DashboardController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Pembelian\PembelianController;
 
 // Public Routes
 Route::get('/', [KatalogController::class, 'index'])->name('home');
@@ -54,6 +55,10 @@ Route::get('/force-logout', function () {
     request()->session()->invalidate();
     request()->session()->regenerateToken();
     return redirect('/login');
+});
+
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::resource('pembelian', PembelianController::class);
 });
 
 require __DIR__ . '/auth.php';

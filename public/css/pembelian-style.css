@@ -1,0 +1,447 @@
+/* ============================================
+   PEMBELIAN MODULE STYLES
+   Warm & Cozy Theme - Consistent with Navbar
+   ============================================ */
+
+/* Container */
+.pembelian-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.pembelian-container.form-view {
+    max-width: 1000px;
+}
+
+/* Header Card */
+.header-card {
+    background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-main) 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-hover);
+    color: white;
+}
+
+.header-card.edit-mode {
+    background: linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-green-soft) 100%);
+}
+
+.header-card h3 {
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-card h3 i {
+    margin-right: 0.5rem;
+}
+
+/* Buttons - Add */
+.btn-add {
+    background: var(--primary-highlight);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-add:hover {
+    background: #ffd966;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    color: var(--primary-dark);
+}
+
+.btn-add i {
+    margin-right: 0.5rem;
+}
+
+/* Alert */
+.alert-success {
+    background: linear-gradient(135deg, #8a9b6e 0%, #6b7e4a 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    font-weight: 500;
+}
+
+.alert-success i {
+    margin-right: 0.5rem;
+}
+
+/* Table Card */
+.table-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+.table {
+    margin: 0;
+}
+
+.table thead {
+    background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-main) 100%);
+}
+
+.table thead th {
+    color: white;
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.table tbody tr:hover {
+    background: var(--cream-bg);
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* Buttons - Edit & Delete */
+.btn-edit {
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+.btn-edit:hover {
+    background: var(--primary-green-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 126, 74, 0.3);
+    color: white;
+}
+
+.btn-delete {
+    background: #c85a54;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.btn-delete:hover {
+    background: #a94842;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200, 90, 84, 0.3);
+}
+
+.action-cell form {
+    display: inline-block;
+}
+
+/* Badge */
+.badge-number {
+    background: var(--cream-bg);
+    color: var(--primary-dark);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-gray);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--primary-wood);
+    margin-bottom: 1rem;
+}
+
+.empty-state h5 {
+    margin-top: 1rem;
+    color: var(--text-medium);
+}
+
+.empty-state p {
+    color: var(--text-gray);
+}
+
+/* Form Card */
+.form-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Form Elements */
+.form-label {
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-label i {
+    margin-right: 0.5rem;
+    color: var(--primary-accent);
+}
+
+.form-select, 
+.form-control {
+    border: 2px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-select:focus, 
+.form-control:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 0.2rem rgba(107, 126, 74, 0.15);
+    outline: none;
+}
+
+/* Section Divider */
+.section-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-wood), transparent);
+    margin: 2rem 0;
+}
+
+.section-divider.edit-mode {
+    background: linear-gradient(90deg, transparent, var(--primary-accent), transparent);
+}
+
+/* Section Title */
+.section-title {
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.section-title i {
+    color: var(--primary-accent);
+    margin-right: 0.75rem;
+}
+
+/* Product Row */
+.produk-row {
+    background: var(--cream-bg);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.produk-row:hover {
+    border-color: var(--primary-wood);
+    box-shadow: var(--shadow-soft);
+}
+
+.edit-mode .produk-row:hover {
+    border-color: var(--primary-accent);
+}
+
+/* Buttons - Remove Row */
+.btn-remove {
+    background: #c85a54;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-remove:hover {
+    background: #a94842;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200, 90, 84, 0.3);
+}
+
+.btn-remove i {
+    margin-right: 0.5rem;
+}
+
+/* Buttons - Add Row */
+.btn-add-row {
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-add-row:hover {
+    background: var(--primary-green-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 126, 74, 0.3);
+}
+
+.btn-add-row i {
+    margin-right: 0.5rem;
+}
+
+/* Buttons - Submit */
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-main) 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    box-shadow: var(--shadow-soft);
+    font-size: 1.05rem;
+}
+
+.btn-submit.edit-mode {
+    background: linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-green-soft) 100%);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-submit i {
+    margin-right: 0.5rem;
+}
+
+/* Buttons - Cancel */
+.btn-cancel {
+    background: white;
+    color: var(--text-dark);
+    border: 2px solid var(--border-soft);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
+
+.btn-cancel:hover {
+    border-color: var(--primary-wood);
+    background: var(--cream-bg);
+}
+
+.edit-mode .btn-cancel:hover {
+    border-color: var(--primary-accent);
+}
+
+.btn-cancel i {
+    margin-right: 0.5rem;
+}
+
+/* Info Badge (for Edit Mode) */
+.info-badge {
+    background: linear-gradient(135deg, var(--primary-highlight) 0%, #ffd966 100%);
+    color: var(--primary-dark);
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.info-badge i {
+    margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pembelian-container,
+    .pembelian-container.form-view {
+        padding: 1rem;
+    }
+
+    .header-card {
+        padding: 1.5rem;
+    }
+
+    .header-card h3 {
+        font-size: 1.35rem;
+    }
+
+    .table-card {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+
+    .btn-edit,
+    .btn-delete {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .form-card {
+        padding: 1.5rem;
+    }
+
+    .produk-row {
+        padding: 0.75rem;
+    }
+
+    .btn-remove {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .btn-cancel {
+        width: 100%;
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
