@@ -48,7 +48,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('pembelian.*') ? 'active' : '' }}" 
-                           href="#">
+                           href="{{ route('pembelian.index')}}">
                             <i class="bi bi-cart-check me-1"></i>Pembelian
                         </a>
                     </li>
