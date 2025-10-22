@@ -29,40 +29,62 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     
-                    {{-- PERUBAHAN DI SINI: Link Katalog hanya tampil jika user login --}}
+                    {{-- Link Katalog hanya tampil jika user login --}}
                     @if(Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('katalog.index') }}">Katalog</a>
+                        <a class="nav-link {{ request()->routeIs('katalog.*') ? 'active' : '' }}" 
+                           href="{{ route('katalog.index') }}">
+                            <i class="bi bi-grid me-1"></i>Katalog
+                        </a>
                     </li>
                     @endif
 
                     @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kasir</a>
+                        <a class="nav-link {{ request()->routeIs('kasir.*') ? 'active' : '' }}" 
+                           href="#">
+                            <i class="bi bi-cash-register me-1"></i>Kasir
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pembelian</a>
+                        <a class="nav-link {{ request()->routeIs('pembelian.*') ? 'active' : '' }}" 
+                           href="#">
+                            <i class="bi bi-cart-check me-1"></i>Pembelian
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Penjualan</a>
+                        <a class="nav-link {{ request()->routeIs('penjualan.*') ? 'active' : '' }}" 
+                           href="#">
+                            <i class="bi bi-bag-check me-1"></i>Penjualan
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Laporan</a>
+                        <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" 
+                           href="#">
+                            <i class="bi bi-file-earmark-bar-graph me-1"></i>Laporan
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pelanggan</a>
+                        <a class="nav-link {{ request()->routeIs('pelanggan.*') ? 'active' : '' }}" 
+                           href="#">
+                            <i class="bi bi-people me-1"></i>Pelanggan
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Stok</a>
+                        <a class="nav-link {{ request()->routeIs('stok.*') ? 'active' : '' }}" 
+                           href="{{ route('stok.index') }}">
+                            <i class="bi bi-box-seam me-1"></i>Stok
+                        </a>
                     </li>
                     @endauth
                 </ul>
 
                 <ul class="navbar-nav ms-auto align-items-center">
                     @guest
-                        {{-- PERUBAHAN DI SINI: Class diubah menjadi button --}}
                         <li class="nav-item">
-                            <a class="btn btn-nav btn-sm" href="{{ route('login') }}">Login</a>
+                            <a class="btn btn-nav btn-sm" href="{{ route('login') }}">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                            </a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
@@ -72,18 +94,22 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">
-                                    <i class="bi bi-speedometer2 me-2"></i>Dashboard
-                                </a></li>
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    <i class="bi bi-person me-2"></i>Profile
-                                </a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                        <i class="bi bi-person me-2"></i>Profile
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item text-danger">
-                                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                            <i class="bi bi-box-arrow-right me-2"></i>Logout
                                         </button>
                                     </form>
                                 </li>
@@ -120,7 +146,12 @@
                     <h6>Menu</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ route('home') }}">Home</a></li>
+                        @auth
                         <li class="mb-2"><a href="{{ route('katalog.index') }}">Katalog</a></li>
+                        <li class="mb-2"><a href="{{ route('stok.index') }}">Stok</a></li>
+                        @else
+                        <li class="mb-2"><a href="{{ route('katalog.index') }}">Katalog</a></li>
+                        @endauth
                         <li class="mb-2"><a href="#">Tentang Kami</a></li>
                         <li class="mb-2"><a href="#">Kontak</a></li>
                     </ul>
