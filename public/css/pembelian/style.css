@@ -1,0 +1,373 @@
+/* public/css/pembelian/style.css */
+:root {
+    --primary-dark: #3d2817;
+    --primary-main: #7a5c47;
+    --primary-wood: #8d6f56;
+    --primary-accent: #6b7e4a;
+    --primary-highlight: #e8c77d;
+    --cream-bg: #f5f1e8;
+    --text-dark: #2d2520;
+    --text-medium: #5d5349;
+    --border-soft: #e5dfd5;
+    --shadow-soft: 0 2px 8px rgba(61, 40, 23, 0.08);
+    --shadow-hover: 0 8px 24px rgba(61, 40, 23, 0.12);
+}
+
+/* === INDEX: Page Header === */
+.page-header {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-soft);
+    border-left: 4px solid var(--primary-wood);
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--text-medium);
+    font-size: 0.95rem;
+}
+
+/* === INDEX: Table Card === */
+.table-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+.table-header {
+    background: var(--cream-bg);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 2px solid var(--border-soft);
+}
+
+.table-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 0;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: var(--primary-wood);
+    color: #ffffff;
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: var(--cream-bg);
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: var(--text-dark);
+}
+
+/* === INDEX: Buttons === */
+.btn-primary-custom {
+    background: var(--primary-wood);
+    border: none;
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.btn-primary-custom:hover {
+    background: var(--primary-main);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    color: white;
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.3s ease;
+    margin: 0 2px;
+    font-size: 0.875rem;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+}
+
+.btn-edit { 
+    background: #ffc107; 
+    color: #000; 
+}
+.btn-edit:hover { 
+    background: #e0a800; 
+}
+
+.btn-delete { 
+    background: #dc3545; 
+    color: white; 
+}
+.btn-delete:hover { 
+    background: #c82333; 
+}
+
+/* === INDEX: Alert === */
+.alert-custom {
+    border-radius: 10px;
+    border: none;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-soft);
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background: #d4edda;
+    border-left-color: #28a745;
+    color: #155724;
+}
+
+/* === INDEX: Empty State === */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+.empty-state i {
+    font-size: 4rem;
+    color: var(--text-medium);
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+}
+.empty-state h4 { 
+    color: var(--text-dark); 
+    margin-bottom: 0.75rem; 
+}
+.empty-state p { 
+    color: var(--text-medium); 
+}
+
+/* === FORM (CREATE/EDIT): Shared Styles === */
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 2rem;
+    border-top: 4px solid var(--primary-wood);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-soft);
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle { 
+    color: var(--text-medium); 
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.form-label .required { 
+    color: #dc3545; 
+}
+
+.form-control, .form-select, textarea {
+    border-radius: 8px;
+    border: 2px solid var(--border-soft);
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+.form-control:focus, .form-select:focus, textarea:focus {
+    border-color: var(--primary-wood);
+    box-shadow: 0 0 0 0.2rem rgba(141, 111, 86, 0.15);
+    outline: none;
+}
+.form-control.is-invalid, .form-select.is-invalid { 
+    border-color: #dc3545; 
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.input-group-icon {
+    background: var(--primary-wood);
+    border: none;
+    color: white;
+    border-radius: 8px 0 0 8px;
+    padding: 0.75rem 1rem;
+}
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-soft);
+}
+.form-section:last-of-type { 
+    border-bottom: none; 
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+.section-title i {
+    margin-right: 0.75rem;
+    color: var(--primary-wood);
+}
+
+.text-muted {
+    color: var(--text-medium) !important;
+    font-size: 0.85rem;
+}
+
+/* === FORM: Buttons === */
+.form-card .btn-primary-custom {
+    padding: 0.875rem 2.5rem;
+}
+.btn-secondary-custom {
+    background: var(--cream-bg);
+    border: none;
+    padding: 0.875rem 2.5rem;
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-secondary-custom:hover { 
+    background: var(--border-soft); 
+}
+
+/* === FORM: Product Row (Dynamic) === */
+.produk-row {
+    background: var(--cream-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.produk-row:hover {
+    border-color: var(--primary-wood);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-remove:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.btn-add-row {
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-add-row:hover {
+    background: #5a6c3e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 126, 74, 0.3);
+}
+
+/* === EDIT MODE Specific === */
+.badge-info {
+    background: var(--primary-highlight);
+    color: var(--primary-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+/* === Price Highlight === */
+.price-highlight {
+    color: var(--primary-accent);
+    font-weight: 700;
+}
+
+/* === Badge Number === */
+.badge-number {
+    background: var(--cream-bg);
+    color: var(--primary-dark);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
