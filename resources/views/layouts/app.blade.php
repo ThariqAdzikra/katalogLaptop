@@ -42,7 +42,7 @@
                     @auth
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('kasir.*') ? 'active' : '' }}" 
-                           href="#">
+                           href="{{ route('penjualan.create') }}">
                             <i class="bi bi-cash-register me-1"></i>Kasir
                         </a>
                     </li>
@@ -54,7 +54,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('penjualan.*') ? 'active' : '' }}" 
-                           href="#">
+                           href="{{ route('penjualan.index') }}">
                             <i class="bi bi-bag-check me-1"></i>Penjualan
                         </a>
                     </li>
