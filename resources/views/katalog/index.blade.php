@@ -120,7 +120,7 @@
                     </div>
                     
                     <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-detail flex-fill">
+                        <a href="{{ route('stok.show', $item->id_produk) }}" class="btn btn-detail flex-fill">
                             <i class="bi bi-eye me-2"></i>Lihat Detail
                         </a>
                         <button class="btn btn-wishlist">

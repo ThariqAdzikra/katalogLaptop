@@ -8,6 +8,13 @@
 @endpush
 
 @section('content')
+
+@php
+    $previousUrl = url()->previous();
+    $datangDariStok = str_contains($previousUrl, '/stok');
+@endphp
+
+
 <div class="container py-4">
     <div class="detail-container">
         <div class="detail-card">
@@ -54,12 +61,14 @@
                         <div class="info-value">{{ $stok->spesifikasi }}</div>
                     </div>
 
+                    @auth
                     <div class="info-row">
                         <div class="info-label">ID Produk</div>
                         <div class="info-value">
                             <code>#{{ $stok->id_produk }}</code>
                         </div>
                     </div>
+                    @endauth
                 </div>
 
                 {{-- Pricing Information --}}
@@ -69,8 +78,15 @@
                     </h3>
 
                     <div class="row g-4">
+                        @auth
+                        {{-- TAMPILAN LENGKAP UNTUK USER LOGIN --}}
                         <div class="col-md-4">
-                            <div class="price-box">
+                            {{-- 
+                            ==================================================
+                            PERUBAHAN 1: Menambahkan h-100
+                            ==================================================
+                            --}}
+                            <div class="price-box h-100">
                                 <div class="price-label">Harga Beli</div>
                                 <div class="price-amount price-buy">
                                     Rp {{ number_format($stok->harga_beli, 0, ',', '.') }}
@@ -79,7 +95,12 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="price-box">
+                            {{-- 
+                            ==================================================
+                            PERUBAHAN 1: Menambahkan h-100
+                            ==================================================
+                            --}}
+                            <div class="price-box h-100">
                                 <div class="price-label">Harga Jual</div>
                                 <div class="price-amount price-sell">
                                     Rp {{ number_format($stok->harga_jual, 0, ',', '.') }}
@@ -88,7 +109,12 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="profit-card">
+                            {{-- 
+                            ==================================================
+                            PERUBAHAN 1: Menambahkan h-100
+                            ==================================================
+                            --}}
+                            <div class="profit-card h-100">
                                 <div class="profit-label">Margin Keuntungan</div>
                                 <div class="profit-value">
                                     Rp {{ number_format($stok->harga_jual - $stok->harga_beli, 0, ',', '.') }}
@@ -98,6 +124,18 @@
                                 </small>
                             </div>
                         </div>
+                        
+                        @else
+                        {{-- TAMPILAN SEDERHANA UNTUK GUEST --}}
+                        <div class="col-12">
+                            <div class="price-box public-price-box">
+                                <div class="price-label">Harga</div>
+                                <div class="price-amount price-sell">
+                                    Rp {{ number_format($stok->harga_jual, 0, ',', '.') }}
+                                </div>
+                            </div>
+                        </div>
+                        @endauth
                     </div>
                 </div>
 
@@ -120,7 +158,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="info-row">
+                            {{-- 
+                            ==================================================
+                            PERUBAHAN 2: Menambahkan align-items-center
+                            ==================================================
+                            --}}
+                            <div class="info-row align-items-center">
                                 <div class="info-label">Status Stok</div>
                                 <div class="info-value">
                                     @if($stok->stok == 0)
@@ -141,6 +184,7 @@
                         </div>
                     </div>
 
+                    @auth
                     <div class="info-row">
                         <div class="info-label">Total Nilai Stok</div>
                         <div class="info-value">
@@ -149,9 +193,10 @@
                             </span>
                         </div>
                     </div>
+                    @endauth
                 </div>
 
-                {{-- Timestamps --}}
+                @auth
                 <div class="info-section">
                     <h3 class="section-title">
                         <i class="bi bi-clock-history"></i>Riwayat
@@ -173,27 +218,36 @@
                         </div>
                     </div>
                 </div>
+                @endauth
 
-                {{-- Action Buttons --}}
+
+                {{-- TOMBOL AKSI --}}
                 <div class="d-flex justify-content-between gap-3 mt-4 pt-4 border-top">
-                    <a href="{{ route('stok.index') }}" class="btn btn-action-detail btn-back-detail">
+                    
+                    <a href="{{ $previousUrl }}" class="btn btn-action-detail btn-back-detail">
                         <i class="bi bi-arrow-left me-2"></i>Kembali
                     </a>
-                    <div class="d-flex gap-3">
-                        <a href="{{ route('stok.edit', $stok->id_produk) }}" class="btn btn-action-detail btn-edit-detail">
-                            <i class="bi bi-pencil-square me-2"></i>Edit Produk
-                        </a>
-                        <form action="{{ route('stok.destroy', $stok->id_produk) }}" 
-                              method="POST" 
-                              class="d-inline"
-                              onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-action-detail btn-delete-detail">
-                                <i class="bi bi-trash me-2"></i>Hapus Produk
-                            </button>
-                        </form>
-                    </div>
+                    
+                    @auth
+                        @if($datangDariStok)
+                        <div class="d-flex gap-3">
+                            <a href="{{ route('stok.edit', $stok->id_produk) }}" class="btn btn-action-detail btn-edit-detail">
+                                <i class="bi bi-pencil-square me-2"></i>Edit Produk
+                            </a>
+                            <form action="{{ route('stok.destroy', $stok->id_produk) }}" 
+                                  method="POST" 
+                                  class="d-inline"
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-action-detail btn-delete-detail">
+                                    <i class="bi bi-trash me-2"></i>Hapus Produk
+                                </button>
+                            </form>
+                        </div>
+                        @endif
+                    @endauth
+                    
                 </div>
             </div>
         </div>
