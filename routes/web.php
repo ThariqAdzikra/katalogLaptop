@@ -12,11 +12,6 @@ use App\Http\Controllers\Pembelian\PembelianController;
 Route::get('/', [KatalogController::class, 'index'])->name('home');
 Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog.index');
 
-// !!! PERUBAHAN 1: Rute 'show' kita buat PUBLIK di sini !!!
-// Rute ini menangani halaman detail produk (stok.show)
-Route::get('stok/{stok}', [StokController::class, 'show'])->name('stok.show');
-
-
 // Authenticated Routes
 Route::get('/dashboard', function () {
     $user = Auth::user();
@@ -55,6 +50,10 @@ Route::middleware('auth')->group(function () {
     // Rute Pembelian juga butuh login
     Route::resource('pembelian', PembelianController::class);
 });
+
+// !!! PERUBAHAN 1: Rute 'show' kita buat PUBLIK di sini !!!
+// Rute ini menangani halaman detail produk (stok.show)
+Route::get('stok/{stok}', [StokController::class, 'show'])->name('stok.show');
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/superadmin/dashboard', [DashboardController::class, 'index'])
