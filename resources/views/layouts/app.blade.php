@@ -29,17 +29,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     
-                    {{-- Link Katalog hanya tampil jika user login --}}
-                    @if(Auth::check())
+                    {{-- 
+                      ============================================
+                      PERUBAHAN 2: Link Katalog digabung ke @auth
+                      ============================================
+                    --}}
+                    @auth
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('katalog.*') ? 'active' : '' }}" 
                            href="{{ route('katalog.index') }}">
                             <i class="bi bi-grid me-1"></i>Katalog
                         </a>
                     </li>
-                    @endif
-
-                    @auth
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('kasir.*') ? 'active' : '' }}" 
                            href="{{ route('penjualan.create') }}">
@@ -90,7 +91,24 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle me-2"></i>
+                                
+                                {{-- 
+                                  ============================================
+                                  PERUBAHAN 1: LOGIKA FOTO PROFIL
+                                  ============================================
+                                --}}
+                                @if(Auth::user()->photo)
+                                    {{-- Tampilkan foto profil jika ada --}}
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" 
+                                         alt="{{ Auth::user()->name }}" 
+                                         class="me-2" 
+                                         style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                                @else
+                                    {{-- Tampilkan ikon default jika tidak ada foto --}}
+                                    <i class="bi bi-person-circle me-2" style="font-size: 1.7rem;"></i>
+                                @endif
+                                {{-- Akhir Perubahan 1 --}}
+
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -146,12 +164,19 @@
                     <h6>Menu</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ route('home') }}">Home</a></li>
+                        
+                        {{-- 
+                          ============================================
+                          PERUBAHAN 3: Link Footer disesuaikan
+                          ============================================
+                          Katalog & Stok hanya tampil jika login,
+                          sesuai dengan logika di navbar.
+                        --}}
                         @auth
                         <li class="mb-2"><a href="{{ route('katalog.index') }}">Katalog</a></li>
                         <li class="mb-2"><a href="{{ route('stok.index') }}">Stok</a></li>
-                        @else
-                        <li class="mb-2"><a href="{{ route('katalog.index') }}">Katalog</a></li>
                         @endauth
+
                         <li class="mb-2"><a href="#">Tentang Kami</a></li>
                         <li class="mb-2"><a href="#">Kontak</a></li>
                     </ul>
