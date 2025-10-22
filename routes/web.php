@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Pembelian\PembelianController;
+use App\Http\Controllers\Penjualan\PenjualanController;
 
 // Public Routes
 Route::get('/', [KatalogController::class, 'index'])->name('home');
@@ -49,11 +50,16 @@ Route::middleware('auth')->group(function () {
     
     // Rute Pembelian juga butuh login
     Route::resource('pembelian', PembelianController::class);
+
+    // Rute Penjualan juga butuh login
+    Route::resource('penjualan', PenjualanController::class);
 });
 
 // !!! PERUBAHAN 1: Rute 'show' kita buat PUBLIK di sini !!!
 // Rute ini menangani halaman detail produk (stok.show)
 Route::get('stok/{stok}', [StokController::class, 'show'])->name('stok.show');
+
+Route::get('/laporan-penjualan', [PenjualanController::class, 'laporan'])->name('penjualan.laporan');
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/superadmin/dashboard', [DashboardController::class, 'index'])
