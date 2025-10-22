@@ -52,7 +52,7 @@ Sistem ini berfungsi untuk memberikan katalog produk kepada calon pembeli, sekal
 
 1. **Clone Repository**
    ``bash
-   git clone https://github.com/username/katalogLaptop.git
+   git clone https://github.com/ThariqAdzikra/katalogLaptop.git
    cd katalogLaptop
 ``
 
