@@ -32,17 +32,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    
+    // Rute Profil (SUDAH DISESUAIKAN)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
+    Route::delete('/profile/photo', [ProfileController::class, 'deletePhoto'])->name('profile.photo.delete');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     // Stok Management Routes
-    // !!! PERUBAHAN 2: Tambahkan ->except(['show']) !!!
-    // Ini mendaftarkan semua rute (index, create, edit, dll) KECUALI 'show'
-    // karena 'show' sudah kita daftarkan di luar grup auth.
     Route::resource('stok', StokController::class)->parameters([
         'stok' => 'stok'
-    ])->except(['show']); //
+    ])->except(['show']);
     
     // Additional route for updating stock quantity only
     Route::patch('/stok/{stok}/update-stok', [StokController::class, 'updateStok'])->name('stok.update-stok');
@@ -51,8 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pembelian', PembelianController::class);
 });
 
-// !!! PERUBAHAN 1: Rute 'show' kita buat PUBLIK di sini !!!
-// Rute ini menangani halaman detail produk (stok.show)
+// Rute 'show' kita buat PUBLIK di sini
 Route::get('stok/{stok}', [StokController::class, 'show'])->name('stok.show');
 
 Route::middleware(['auth', 'verified'])->group(function() {
@@ -67,15 +68,7 @@ Route::get('/force-logout', function () {
     return redirect('/login');
 });
 
-// Saya pindahkan rute pembelian ke dalam grup 'auth' utama di atas
-// agar lebih rapi dan aman.
-/*
-Route::middleware(['auth', 'verified'])->group(function() {
-    Route::resource('pembelian', PembelianController::class);
-});
-*/
-
 require __DIR__ . '/auth.php';
 
-// Hapus '}' ekstra jika ada di file Anda
-// } // <-- Baris ini sepertinya salah ketik di file yang Anda kirim
+// Catatan: Saya telah menghapus '}' ekstra dan duplikat kode 
+// yang ada di file yang Anda unggah.
