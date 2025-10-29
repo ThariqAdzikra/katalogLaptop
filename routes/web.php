@@ -55,6 +55,10 @@ Route::middleware('auth')->group(function () {
 
     // Rute Penjualan juga butuh login
     Route::resource('penjualan', PenjualanController::class);
+
+    // Rute Pelanggan juga butuh login
+    Route::resource('pelanggan', \App\Http\Controllers\PelangganController::class)->except(['show']);
+
 });
 
 // Rute 'show' kita buat PUBLIK di sini

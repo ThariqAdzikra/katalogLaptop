@@ -107,4 +107,11 @@
         </div>
     </div>
 </div>
+
+    @if($pembelian->hasPages())
+        <div class="d-flex justify-content-center p-4">
+            {{ $pembelian->links() }}
+        </div>
+    @endif
+
 @endsection

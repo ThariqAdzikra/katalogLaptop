@@ -67,7 +67,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('pelanggan.*') ? 'active' : '' }}" 
-                           href="#">
+                           href="{{ route('pelanggan.index') }}">
                             <i class="bi bi-people me-1"></i>Pelanggan
                         </a>
                     </li>

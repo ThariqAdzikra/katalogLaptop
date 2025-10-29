@@ -51,7 +51,12 @@ class PenjualanController extends Controller
             $query->orderBy('tanggal_penjualan', 'desc');
     }
 
-    $penjualan = $query->get();
+    $penjualan = Penjualan::with('pelanggan')
+    ->when($request->search, fn($q) => $q->whereHas('pelanggan', fn($p) =>
+        $p->where('nama', 'like', "%{$request->search}%")
+    ))
+    ->paginate(10) // ✅ tambahkan ini
+    ->withQueryString();
 
     return view('penjualan.index', compact('penjualan'));
 }

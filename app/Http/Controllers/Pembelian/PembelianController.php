@@ -13,10 +13,25 @@ use Illuminate\Support\Facades\Auth;
 
 class PembelianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pembelian = Pembelian::with('supplier')->latest()->get();
-        return view('pembelian.index', compact('pembelian'));
+        $pembelian = Pembelian::with('supplier')
+        ->when($request->search, function ($q) use ($request) {
+            $q->whereHas('supplier', function ($s) use ($request) {
+                $s->where('nama_supplier', 'like', "%{$request->search}%");
+            });
+        })
+        ->when($request->filled('sort'), function ($q) use ($request) {
+            if ($request->sort === 'tanggal') {
+                $q->orderBy('tanggal_pembelian', 'desc');
+            } elseif ($request->sort === 'total') {
+                $q->orderBy('total_harga', 'desc');
+            }
+        })
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('pembelian.index', compact('pembelian'));
     }
 
     public function create()

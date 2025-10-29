@@ -11,10 +11,12 @@ class Pelanggan extends Model
 
     protected $table = 'pelanggan';
     protected $primaryKey = 'id_pelanggan';
-    protected $fillable = ['nama', 'no_hp', 'email', 'alamat'];
+    protected $fillable = [
+        'nama', 'no_hp', 'email', 'alamat'
+    ];
 
     public function penjualan()
     {
-        return $this->hasMany(Penjualan::class, 'id_pelanggan');
+        return $this->hasMany(\App\Models\Penjualan::class, 'id_pelanggan');
     }
 }
