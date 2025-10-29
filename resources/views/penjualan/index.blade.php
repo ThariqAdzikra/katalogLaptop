@@ -39,7 +39,7 @@
         <div class="stats-icon" style="background: #e9ecef; color: #0d6efd;">
           <i class="bi bi-receipt"></i>
         </div>
-        <div class="stats-value">{{ $penjualan->count() }}</div>
+        <div class="stats-value">{{ $penjualan->total() ?? $penjualan->count() }}</div>
         <div class="stats-label">Total Transaksi</div>
       </div>
     </div>
@@ -136,7 +136,7 @@
         <tbody>
           @forelse($penjualan as $p)
           <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td>{{ $loop->iteration + ($penjualan->currentPage() - 1) * $penjualan->perPage() }}</td>
             <td>{{ \Carbon\Carbon::parse($p->tanggal_penjualan)->format('d M Y H:i') }}</td>
             <td>{{ $p->pelanggan->nama ?? '-' }}</td>
             <td>
@@ -184,6 +184,13 @@
         </tbody>
       </table>
     </div>
+
+    {{-- ✅ Pagination Section --}}
+    @if($penjualan->hasPages())
+    <div class="d-flex justify-content-center p-4">
+      {{ $penjualan->links() }}
+    </div>
+    @endif
   </div>
 </div>
 @endsection
