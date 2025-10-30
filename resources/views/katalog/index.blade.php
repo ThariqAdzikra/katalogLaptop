@@ -55,10 +55,11 @@
                         </label>
                         <select name="kategori" class="form-select">
                             <option value="">Semua Kategori</option>
-                            <option value="gaming" {{ request('kategori') == 'gaming' ? 'selected' : '' }}>Gaming</option>
-                            <option value="office" {{ request('kategori') == 'office' ? 'selected' : '' }}>Office</option>
-                            <option value="ultrabook" {{ request('kategori') == 'ultrabook' ? 'selected' : '' }}>Ultrabook</option>
-                            <option value="workstation" {{ request('kategori') == 'workstation' ? 'selected' : '' }}>Workstation</option>
+                            @foreach($kategori as $kat)
+                                <option value="{{ $kat->slug }}" {{ request('kategori') == $kat->slug ? 'selected' : '' }}>
+                                    {{ $kat->nama_kategori }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-lg-3">
@@ -80,7 +81,7 @@
     <div class="section-header mt-5 pt-5">
         <h2 class="section-title">Katalog Laptop Premium</h2>
         <div class="section-divider"></div>
-        <p class="section-subtitle">Menampilkan {{ $produk->count() }} produk berkualitas tinggi</p>
+        <p class="section-subtitle">Menampilkan {{ $produk->total() }} produk berkualitas tinggi</p>
     </div>
 
     {{-- Product Grid --}}
@@ -109,7 +110,12 @@
                 </div>
 
                 <div class="product-body">
-                    <span class="badge-brand">{{ $item->merk }}</span>
+                    <div class="d-flex gap-2 mb-2">
+                        <span class="badge-brand">{{ $item->merk }}</span>
+                        <span class="badge-brand" style="background-color: var(--primary-wood); color: white;">
+                            {{ $item->kategori->nama_kategori ?? '-' }}
+                        </span>
+                    </div>
                     
                     <h5 class="product-title">{{ $item->nama_produk }}</h5>
                     
@@ -119,13 +125,15 @@
                         Rp {{ number_format($item->harga_jual, 0, ',', '.') }}
                     </div>
                     
-                    <div class="d-flex gap-2">
+                    {{-- 
+                    ==================================================
+                    DIPERBARUI: Tombol love/wishlist dihapus
+                    ==================================================
+                    --}}
+                    <div class="d-flex">
                         <a href="{{ route('stok.show', $item->id_produk) }}" class="btn btn-detail flex-fill">
                             <i class="bi bi-eye me-2"></i>Lihat Detail
                         </a>
-                        <button class="btn btn-wishlist">
-                            <i class="bi bi-heart"></i>
-                        </button>
                     </div>
                 </div>
             </div>

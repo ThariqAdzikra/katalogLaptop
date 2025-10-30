@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Kategori; // DITAMBAHKAN: Import model Kategori
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,12 +14,15 @@ class StokController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Produk::query();
+        // =================================================================
+        // DIPERBARUI: Query untuk statistik
+        // =================================================================
+        $baseQuery = Produk::query();
 
         // Filter berdasarkan pencarian
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $baseQuery->where(function($q) use ($search) {
                 $q->where('nama_produk', 'like', "%{$search}%")
                   ->orWhere('merk', 'like', "%{$search}%")
                   ->orWhere('spesifikasi', 'like', "%{$search}%");
@@ -29,25 +33,39 @@ class StokController extends Controller
         if ($request->filled('status_stok')) {
             switch ($request->status_stok) {
                 case 'habis':
-                    $query->where('stok', 0);
+                    $baseQuery->where('stok', 0);
                     break;
                 case 'menipis':
-                    $query->where('stok', '>', 0)->where('stok', '<=', 5);
+                    $baseQuery->where('stok', '>', 0)->where('stok', '<=', 5);
                     break;
                 case 'tersedia':
-                    $query->where('stok', '>', 5);
+                    $baseQuery->where('stok', '>', 5);
                     break;
             }
         }
+        
+        // Ambil statistik *sebelum* paginasi
+        $stats = [
+            'total' => $baseQuery->count(),
+            'tersedia' => (clone $baseQuery)->where('stok', '>', 5)->count(),
+            'menipis' => (clone $baseQuery)->where('stok', '>', 0)->where('stok', '<=', 5)->count(),
+            'habis' => (clone $baseQuery)->where('stok', 0)->count(),
+        ];
+
+        // Lanjutkan query untuk data paginasi
+        $query = $baseQuery;
 
         // Sorting
         $sortBy = $request->get('sort_by', 'nama_produk');
         $sortOrder = $request->get('sort_order', 'asc');
         $query->orderBy($sortBy, $sortOrder);
 
-        $produk = $query->paginate(10)->withQueryString();
+        // =================================================================
+        // DIPERBARUI: Eager load relasi 'kategori'
+        // =================================================================
+        $produk = $query->with('kategori')->paginate(10)->withQueryString();
 
-        return view('stok.index', compact('produk'));
+        return view('stok.index', compact('produk', 'stats')); // Stats dikirim ke view
     }
 
     /**
@@ -55,7 +73,11 @@ class StokController extends Controller
      */
     public function create()
     {
-        return view('stok.create');
+        // =================================================================
+        // DIPERBARUI: Ambil data kategori untuk dropdown
+        // =================================================================
+        $kategori = Kategori::orderBy('nama_kategori', 'asc')->get();
+        return view('stok.create', compact('kategori'));
     }
 
     /**
@@ -63,7 +85,11 @@ class StokController extends Controller
      */
     public function store(Request $request)
     {
+        // =================================================================
+        // DIPERBARUI: Tambah validasi untuk 'id_kategori'
+        // =================================================================
         $validated = $request->validate([
+            'id_kategori' => 'required|exists:kategori,id_kategori',
             'nama_produk' => 'required|string|max:150',
             'merk' => 'required|string|max:100',
             'spesifikasi' => 'required|string',
@@ -72,6 +98,8 @@ class StokController extends Controller
             'stok' => 'required|integer|min:0',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
+            'id_kategori.required' => 'Kategori produk harus dipilih',
+            'id_kategori.exists' => 'Kategori yang dipilih tidak valid',
             'nama_produk.required' => 'Nama produk harus diisi',
             'merk.required' => 'Merk harus diisi',
             'spesifikasi.required' => 'Spesifikasi harus diisi',
@@ -98,7 +126,10 @@ class StokController extends Controller
      */
     public function show($id)
     {
-        $stok = Produk::findOrFail($id);
+        // =================================================================
+        // DIPERBARUI: Eager load relasi 'kategori'
+        // =================================================================
+        $stok = Produk::with('kategori')->findOrFail($id);
         return view('stok.show', compact('stok'));
     }
 
@@ -107,8 +138,12 @@ class StokController extends Controller
      */
     public function edit($id)
     {
+        // =================================================================
+        // DIPERBARUI: Ambil data produk dan kategori
+        // =================================================================
         $stok = Produk::findOrFail($id);
-        return view('stok.edit', compact('stok'));
+        $kategori = Kategori::orderBy('nama_kategori', 'asc')->get();
+        return view('stok.edit', compact('stok', 'kategori'));
     }
 
     /**
@@ -118,7 +153,11 @@ class StokController extends Controller
     {
         $stok = Produk::findOrFail($id);
 
+        // =================================================================
+        // DIPERBARUI: Tambah validasi untuk 'id_kategori'
+        // =================================================================
         $validated = $request->validate([
+            'id_kategori' => 'required|exists:kategori,id_kategori',
             'nama_produk' => 'required|string|max:150',
             'merk' => 'required|string|max:100',
             'spesifikasi' => 'required|string',
@@ -127,6 +166,8 @@ class StokController extends Controller
             'stok' => 'required|integer|min:0',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
+            'id_kategori.required' => 'Kategori produk harus dipilih',
+            'id_kategori.exists' => 'Kategori yang dipilih tidak valid',
             'nama_produk.required' => 'Nama produk harus diisi',
             'merk.required' => 'Merk harus diisi',
             'spesifikasi.required' => 'Spesifikasi harus diisi',

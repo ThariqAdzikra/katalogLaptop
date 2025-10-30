@@ -56,6 +56,20 @@
                         </div>
                     </div>
 
+                    {{-- 
+                    ==================================================
+                    DITAMBAHKAN: Menampilkan Kategori Produk
+                    ==================================================
+                    --}}
+                    <div class="info-row">
+                        <div class="info-label">Kategori</div>
+                        <div class="info-value">
+                            <span class="badge-merk show-page">
+                                {{ $stok->kategori->nama_kategori ?? 'Tidak Dikategorikan' }}
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="info-row">
                         <div class="info-label">Spesifikasi</div>
                         <div class="info-value">{{ $stok->spesifikasi }}</div>
