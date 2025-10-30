@@ -58,6 +58,28 @@
                             @enderror
                         </div>
 
+                        {{-- 
+                        ==================================================
+                        DITAMBAHKAN: Dropdown Kategori
+                        ==================================================
+                        --}}
+                        <div class="col-md-12">
+                            <label class="form-label">
+                                Kategori <span class="required">*</span>
+                            </label>
+                            <select name="id_kategori" class="form-select @error('id_kategori') is-invalid @enderror" required>
+                                <option value="" disabled selected>-- Pilih Kategori --</option>
+                                @foreach($kategori as $kat)
+                                    <option value="{{ $kat->id_kategori }}" {{ old('id_kategori') == $kat->id_kategori ? 'selected' : '' }}>
+                                        {{ $kat->nama_kategori }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_kategori')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="col-12">
                             <label class="form-label">
                                 Spesifikasi <span class="required">*</span>

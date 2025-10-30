@@ -32,14 +32,18 @@
     </div>
     @endif
 
-    {{-- Statistics Cards --}}
+    {{-- 
+    ==================================================
+    DIPERBARUI: Statistik sekarang menggunakan var $stats dari controller
+    ==================================================
+    --}}
     <div class="row">
         <div class="col-md-3">
             <div class="stats-card">
                 <div class="stats-icon">
                     <i class="bi bi-archive"></i>
                 </div>
-                <div class="stats-value">{{ $produk->total() }}</div>
+                <div class="stats-value">{{ $stats['total'] }}</div>
                 <div class="stats-label">Total Produk</div>
             </div>
         </div>
@@ -48,7 +52,7 @@
                 <div class="stats-icon" style="background: #d4edda; color: #28a745;">
                     <i class="bi bi-check-circle"></i>
                 </div>
-                <div class="stats-value">{{ $produk->where('stok', '>', 5)->count() }}</div>
+                <div class="stats-value">{{ $stats['tersedia'] }}</div>
                 <div class="stats-label">Stok Tersedia</div>
             </div>
         </div>
@@ -57,7 +61,7 @@
                 <div class="stats-icon" style="background: #fff3cd; color: #fd7e14;">
                     <i class="bi bi-exclamation-triangle"></i>
                 </div>
-                <div class="stats-value">{{ $produk->where('stok', '>', 0)->where('stok', '<=', 5)->count() }}</div>
+                <div class="stats-value">{{ $stats['menipis'] }}</div>
                 <div class="stats-label">Stok Menipis</div>
             </div>
         </div>
@@ -66,7 +70,7 @@
                 <div class="stats-icon" style="background: #f8d7da; color: #dc3545;">
                     <i class="bi bi-x-circle"></i>
                 </div>
-                <div class="stats-value">{{ $produk->where('stok', 0)->count() }}</div>
+                <div class="stats-value">{{ $stats['habis'] }}</div>
                 <div class="stats-label">Stok Habis</div>
             </div>
         </div>
@@ -138,12 +142,17 @@
         <div class="table-responsive">
             <table class="table">
                 <thead>
+                    {{-- 
+                    ==================================================
+                    DIPERBARUI: Kolom 'Spesifikasi' diganti 'Kategori'
+                    ==================================================
+                    --}}
                     <tr>
                         <th>No</th>
                         <th>Gambar</th>
                         <th>Produk</th>
                         <th>Merk</th>
-                        <th>Spesifikasi</th>
+                        <th>Kategori</th>
                         <th>Harga Beli</th>
                         <th>Harga Jual</th>
                         <th>Stok</th>
@@ -172,8 +181,13 @@
                         <td>
                             <span class="badge-merk">{{ $item->merk }}</span>
                         </td>
+                        {{-- 
+                        ==================================================
+                        DIPERBARUI: Menampilkan nama kategori
+                        ==================================================
+                        --}}
                         <td>
-                            <small class="text-muted">{{ Str::limit($item->spesifikasi, 40) }}</small>
+                            {{ $item->kategori->nama_kategori ?? '-' }}
                         </td>
                         <td class="fw-semibold" style="color: #28a745;">
                             Rp {{ number_format($item->harga_beli, 0, ',', '.') }}

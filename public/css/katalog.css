@@ -177,7 +177,8 @@
 }
 
 .product-img-wrapper {
-    height: 280px;
+    /* === DIPERBARUI: Dikurangi dari 240px === */
+    height: 220px; 
     background: linear-gradient(135deg, #faf7f0 0%, #f5f1e8 100%);
     display: flex;
     align-items: center;
@@ -222,7 +223,8 @@
 }
 
 .product-body {
-    padding: 2rem;
+    /* === DIPERBARUI: Dikurangi dari 2rem === */
+    padding: 1.5rem;
 }
 
 .badge-brand {
@@ -233,7 +235,8 @@
     border-radius: 8px;
     font-weight: 700;
     font-size: 0.85rem;
-    margin-bottom: 1rem;
+    /* === DIPERBARUI: Dikurangi dari 1rem === */
+    margin-bottom: 0.75rem;
     letter-spacing: 0.5px;
 }
 
@@ -241,32 +244,35 @@
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 0.75rem;
+    /* === DIPERBARUI: Dikurangi dari 0.75rem === */
+    margin-bottom: 0.5rem;
     line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 3.5rem;
+    min-height: 3rem; 
 }
 
 .product-desc {
     font-size: 0.9rem;
     color: var(--text-gray);
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    /* === DIPERBARUI: Dikurangi dari 1.5rem === */
+    margin-bottom: 1rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 3rem;
+    min-height: 2.8rem; 
 }
 
 .product-price {
     font-size: 1.85rem;
     font-weight: 800;
     color: var(--primary-main);
-    margin-bottom: 1.5rem;
+    /* === DIPERBARUI: Dikurangi dari 1.5rem === */
+    margin-bottom: 1rem;
     letter-spacing: -0.5px;
 }
 
@@ -290,22 +296,8 @@
     box-shadow: 0 8px 24px rgba(61, 40, 23, 0.25);
 }
 
-.btn-wishlist {
-    background: #ffffff;
-    border: 2px solid var(--border-soft);
-    color: var(--text-gray);
-    padding: 0.85rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    min-width: 48px;
-}
+/* === DIHAPUS: Blok .btn-wishlist dan :hover === */
 
-.btn-wishlist:hover {
-    background: rgba(220, 38, 38, 0.1);
-    border-color: #dc2626;
-    color: #dc2626;
-    transform: scale(1.05);
-}
 
 /* Section Headers with Elegance */
 .section-header {
