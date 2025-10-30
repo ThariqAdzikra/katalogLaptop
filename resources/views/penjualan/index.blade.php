@@ -3,7 +3,7 @@
 @section('title', 'Manajemen Penjualan - Laptop Store')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/stok/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/manajemen/style.css') }}">
 @endpush
 
 @section('content')
@@ -136,6 +136,7 @@
         <tbody>
           @forelse($penjualan as $p)
           <tr>
+            {{-- Penomoran yang benar --}}
             <td>{{ $loop->iteration + ($penjualan->currentPage() - 1) * $penjualan->perPage() }}</td>
             <td>{{ \Carbon\Carbon::parse($p->tanggal_penjualan)->format('d M Y H:i') }}</td>
             <td>{{ $p->pelanggan->nama ?? '-' }}</td>
@@ -180,17 +181,22 @@
               </div>
             </td>
           </tr>
-          @endforelse
+          @endForelse
         </tbody>
       </table>
     </div>
 
-    {{-- ✅ Pagination Section --}}
+    {{-- ✅ PAGINATION (INI YANG DIPERBAIKI) --}}
     @if($penjualan->hasPages())
     <div class="d-flex justify-content-center p-4">
-      {{ $penjualan->links() }}
+      {{-- 
+        Gunakan .onEachSide(1) untuk membuatnya ringkas 
+        (cth: ... 2 [3] 4 ...)
+      --}}
+      {{ $penjualan->appends(request()->query())->onEachSide(1)->links('pagination::bootstrap-5') }}
     </div>
     @endif
+    
   </div>
 </div>
 @endsection

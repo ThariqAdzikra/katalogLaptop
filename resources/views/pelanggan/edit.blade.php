@@ -2,7 +2,7 @@
 @section('title', 'Edit Pelanggan - Laptop Store')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/stok/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/manajemen/style.css') }}">
 @endpush
 
 @section('content')

@@ -81,6 +81,7 @@
     <div class="section-header mt-5 pt-5">
         <h2 class="section-title">Katalog Laptop Premium</h2>
         <div class="section-divider"></div>
+        {{-- Pastikan $produk memiliki data total() dari pagination --}}
         <p class="section-subtitle">Menampilkan {{ $produk->total() }} produk berkualitas tinggi</p>
     </div>
 
@@ -125,11 +126,6 @@
                         Rp {{ number_format($item->harga_jual, 0, ',', '.') }}
                     </div>
                     
-                    {{-- 
-                    ==================================================
-                    DIPERBARUI: Tombol love/wishlist dihapus
-                    ==================================================
-                    --}}
                     <div class="d-flex">
                         <a href="{{ route('stok.show', $item->id_produk) }}" class="btn btn-detail flex-fill">
                             <i class="bi bi-eye me-2"></i>Lihat Detail
@@ -152,10 +148,15 @@
         @endforelse
     </div>
 
-    {{-- Pagination --}}
+    {{-- ✅ PAGINATION (SUDAH DIPERBAIKI SESUAI PERMINTAAN) --}}
     @if($produk->hasPages())
     <div class="d-flex justify-content-center pb-5">
-        {{ $produk->links() }}
+        {{-- 
+          - appends(request()->query()) agar filter tetap aktif saat pindah halaman 
+          - onEachSide(1) agar pagination ringkas (cth: 1, 2, [3], 4, 5, ...)
+          - links('pagination::bootstrap-5') agar memakai gaya Bootstrap 5
+        --}}
+        {{ $produk->appends(request()->query())->onEachSide(1)->links('pagination::bootstrap-5') }}
     </div>
     @endif
 </div>

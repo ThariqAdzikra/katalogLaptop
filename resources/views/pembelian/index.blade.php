@@ -3,7 +3,9 @@
 @section('title', 'Data Pembelian - Laptop Store')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/pembelian/style.css') }}">
+{{-- Anda bisa gunakan salah satu, tapi stok/style.css sepertinya yang Anda inginkan --}}
+<link rel="stylesheet" href="{{ asset('css/manajemen/style.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('css/pembelian/style.css') }}"> --}}
 @endpush
 
 @section('content')
@@ -53,7 +55,9 @@
                     @forelse ($pembelian as $p)
                     <tr>
                         <td>
-                            <span class="badge-number">{{ $loop->iteration }}</span>
+                            <span class="badge-number">
+                                {{ $loop->iteration + ($pembelian->currentPage() - 1) * $pembelian->perPage() }}
+                            </span>
                         </td>
                         <td class="fw-semibold">
                             {{ \Carbon\Carbon::parse($p->tanggal_pembelian)->format('d M Y') }}
@@ -105,13 +109,14 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- ✅ PAGINATION DIPERBAIKI (menggunakan text-center) --}}
+        @if($pembelian->hasPages())
+            <div class="p-4 text-center">
+                {{ $pembelian->appends(request()->query())->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
+
     </div>
 </div>
-
-    @if($pembelian->hasPages())
-        <div class="d-flex justify-content-center p-4">
-            {{ $pembelian->links() }}
-        </div>
-    @endif
-
 @endsection

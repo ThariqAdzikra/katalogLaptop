@@ -41,7 +41,8 @@ class KatalogController extends Controller
         $kategori = Kategori::orderBy('nama_kategori', 'asc')->get();
 
         // Paginate results
-        $produk = $query->latest()->paginate(9)->withQueryString(); // Ditambahkan withQueryString()
+        // ✅ DISESUAIKAN: Angka 9 diubah menjadi 6 sesuai permintaan Anda
+        $produk = $query->latest()->paginate(6)->withQueryString(); 
 
         // =================================================================
         // DIPERBARUI: Kirim data 'kategori' ke view

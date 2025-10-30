@@ -3,7 +3,7 @@
 @section('title', 'Tambah Pembelian - Laptop Store')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/pembelian/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/manajemen/style.css') }}">
 @endpush
 
 @section('content')

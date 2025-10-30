@@ -4,7 +4,7 @@
 
 @push('styles')
 {{-- Memanggil file CSS eksternal --}}
-<link rel="stylesheet" href="{{ asset('css/stok/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/manajemen/style.css') }}">
 @endpush
 
 @section('content')
