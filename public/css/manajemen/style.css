@@ -578,49 +578,91 @@ code {
     font-weight: 600;
 }
 
-/* ==== Kasir Full Width Layout ==== */
-.form-container {
-  max-width: 100% !important;
-  width: 100%;
-  padding: 0;
-}
 
-.form-card {
-  max-width: 100% !important;
-  width: 100%;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.form-section {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-}
-
+/* =====================================================
+✅ CSS BARU UNTUK HALAMAN KASIR
+=====================================================
+*/
 .container-fluid {
-  background-color: #f9f7f4;
-  min-height: 100vh;
+    background-color: var(--cream-bg);
 }
 
-/* Pastikan grid kiri-kanan tetap proporsional */
-.row.g-4 > [class*="col-md-"] {
-  display: flex;
-  flex-direction: column;
+/* Target form-container HANYA saat di dalam container-fluid (Halaman Kasir) */
+.container-fluid .form-container {
+    max-width: 1400px; /* Layout lebar tapi tidak 100% */
+    margin: 0 auto;
 }
 
-/* Responsif untuk layar kecil */
-@media (max-width: 992px) {
-  .col-md-8, .col-md-4 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+/* Wrapper untuk membuat kolom ringkasan sticky */
+.summary-sticky-wrapper {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 100px; /* Sesuaikan dengan tinggi navbar Anda + padding */
 }
 
+/* Kartu Ringkasan */
+.summary-card {
+    background: var(--cream-bg);
+    border-radius: 10px;
+    border: 2px solid var(--border-soft);
+    box-shadow: none; /* Hapus shadow ganda */
+}
 
-/* === FORM (CREATE/EDIT): Body Background === */
-/* Anda bisa meng-scoping ini ke halaman tertentu jika layouts/app.blade.php tidak menanganinya */
-/* body { background: var(--cream-bg); min-height: 100vh; padding-top: 80px; } */
+/* Styling daftar item di ringkasan */
+.summary-item-list {
+    padding: 0;
+}
+.summary-item-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.9rem;
+}
+.summary-item-list li:last-child {
+    border-bottom: none;
+}
+.summary-item-list li span {
+    color: var(--text-medium);
+}
+.summary-item-list li strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+.summary-item-list .text-muted {
+    justify-content: center;
+    color: var(--text-medium) !important;
+}
+
+/* Styling Total Section */
+.total-section {
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 2px dashed var(--primary-wood);
+    text-align: center;
+}
+
+#total-display {
+    color: var(--primary-dark);
+    font-size: 2.25rem;
+}
+/* =====================================================
+✅ AKHIR DARI CSS BARU
+=====================================================
+*/
+
+
+/* (BAGIAN DI BAWAH INI SAYA HAPUS KARENA MENYEBABKAN LAYOUT BERANTAKAN)
+   
+    /* ==== Kasir Full Width Layout ==== */
+    /*
+    .form-container {
+      max-width: 100% !important;
+      ...
+    }
+    .form-card {
+      ...
+    }
+    ... (dan sisa kode di bawahnya) ...
+    */
