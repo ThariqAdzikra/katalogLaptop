@@ -36,6 +36,7 @@ class Produk extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id_kategori', // DITAMBAHKAN
         'nama_produk',
         'merk',
         'spesifikasi',
@@ -117,6 +118,20 @@ class Produk extends Model
         return $this->harga_jual * $this->stok;
     }
 
+    // =================================================================
+    // == RELASI DAN SCOPE BARU DITAMBAHKAN DI SINI ==
+    // =================================================================
+
+    /**
+     * Relasi many-to-one ke Kategori.
+     * Satu produk hanya memiliki satu kategori.
+     */
+    public function kategori()
+    {
+        // belongsTo(NamaModel, foreign_key, owner_key)
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
+    }
+
     /**
      * Scope untuk filter produk dengan stok habis
      */
@@ -151,5 +166,18 @@ class Produk extends Model
               ->orWhere('merk', 'like', "%{$search}%")
               ->orWhere('spesifikasi', 'like', "%{$search}%");
         });
+    }
+
+    /**
+     * Scope untuk filter berdasarkan slug kategori
+     */
+    public function scopeFilterByKategori($query, $slug)
+    {
+        if ($slug) {
+            return $query->whereHas('kategori', function ($q) use ($slug) {
+                $q->where('slug', $slug);
+            });
+        }
+        return $query;
     }
 }
