@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     // Rute Pembelian juga butuh login
     Route::resource('pembelian', PembelianController::class);
 
-    // Rute Penjualan juga butuh login
+    // ✅ KEMBALIKAN RUTE INI KE BENTUK RESOURCE DEFAULT
     Route::resource('penjualan', PenjualanController::class);
 
     // Rute Pelanggan juga butuh login
@@ -79,6 +79,3 @@ Route::get('/force-logout', function () {
 });
 
 require __DIR__ . '/auth.php';
-
-// Catatan: Saya telah menghapus '}' ekstra dan duplikat kode 
-// yang ada di file yang Anda unggah.
